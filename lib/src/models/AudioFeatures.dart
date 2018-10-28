@@ -95,4 +95,19 @@ class AudioFeatures {
   ///(e.g. happy, cheerful, euphoric), while tracks with low valence 
   ///sound more negative (e.g. sad, depressed, angry).
   double valance;
+
+  AudioFeatures(this.acousticness, this.analysisUrl, this.danceability, 
+                this.durationMS, this.energy, this.id, this.instrumentalness,
+                this.key, this.liveness, this.loudness, this.mode, 
+                this.speechiness, this.tempo, this.timeSignature, 
+                this.trackHref, this.uri, this.valance);
+
+  factory AudioFeatures.fromJSON(Map<String, dynamic> json) {
+    return AudioFeatures(json['acousticness'], json['analysisUrl'], 
+                json['danceability'], json['durationMS'], json['energy'], 
+                json['id'], json['instrumentalness'], json['key'], 
+                json['liveness'], json['loudness'], json['mode'], 
+                json['speechiness'], json['tempo'], json['timeSignature'], 
+                json['trackHref'], json['uri'], json['valance']);
+  }
 }

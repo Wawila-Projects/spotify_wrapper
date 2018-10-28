@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:spotify_wrapper/src/Abstracts/Endpoints.dart';
+import 'package:spotify_wrapper/src/models/AudioFeatures.dart';
 import 'package:spotify_wrapper/src/models/Track.dart';
 
 class TrackEndpoints extends Endpoints {
@@ -26,5 +27,11 @@ class TrackEndpoints extends Endpoints {
       tracks.add(Track.fromJSON(track));
     }
     return tracks;
+  }
+
+  ///	Get Audio Features for a Track	
+  Future<AudioFeatures> getAudioFeatures(String id) async {
+    final response = await httpGet('audio-features/$id');
+    return AudioFeatures.fromJSON(response);
   }
 }
