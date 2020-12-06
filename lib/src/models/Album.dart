@@ -14,36 +14,36 @@ class AlbumSimplified extends SpotifyObject {
   ///Possible values are “album”, “single”, “compilation”, “appears_on”. 
   ///Compare to album_type this field represents relationship between 
   ///the artist and the album.
-  String albumGroup;
+  final String albumGroup;
 
   ///The type of the album: one of [album], [single], or [compilation].
-  AlbumType albumType;
+  final AlbumType albumType;
 
   ///The artists of the album. Each artist object includes 
   ///a link in [href] to more detailed information about the artist.
-  List<ArtistSimplified> artists;
+  final List<ArtistSimplified> artists;
 
   ///A list of the countries in which the album can be played,
   ///identified by their ISO 3166-1 alpha-2 code.
-  List<String> availableMarkets;
+  final List<String> availableMarkets;
 
   ///External URLs for this album.
-  ExternalUrls externalUrls;	
+  final ExternalUrls externalUrls;	
 
   ///A link to the Web API endpoint providing full details of the album.
-  String href; 
+  final String href; 
 
   //The Spotify ID for the album.
-  String id;
+  final String id;
 
   ///The cover art for the album in various sizes, widest first.
-  List<SpotifyImage> images;
+  final List<SpotifyImage> images;
 
   ///The name of the album.
-  String name;
+  final String name;
 
   ///Costume class to encapsulate the release date and the precision
-  Date releaseDate;
+  final Date releaseDate;
 
   ///Part of the response when Track Relinking is applied, the original 
   ///track is not available in the given market, and Spotify did not have
@@ -51,12 +51,12 @@ class AlbumSimplified extends SpotifyObject {
   ///metadata for the original track, and a restrictions object containing 
   ///the reason why the track is not available: 
   /// ```"restrictions" : {"reason" : "market"}```
-  Map<String, dynamic> restrictions;
+  final Map<String, dynamic> restrictions;
   
   ///The Spotify URI for the album.
-  String uri; 
+  final String uri; 
 
-  AlbumSimplified(this.albumGroup, this.albumType, this.artists, this.externalUrls, this.href, 
+  const AlbumSimplified(this.albumGroup, this.albumType, this.artists, this.externalUrls, this.href, 
                   this.availableMarkets, this.id, this.images, 
                   this.name, this.releaseDate, 
                   this.restrictions, this.uri): super(SpotifyType.Album);   
@@ -89,27 +89,27 @@ class AlbumSimplified extends SpotifyObject {
 class Album extends AlbumSimplified {
 
   ///The copyright statements of the album.
-  List<Copyright> copyrights;
+  final List<Copyright> copyrights;
 
   ///Known external IDs for the album.
-  ExternalIDs externalIds;
+  final ExternalIDs externalIds;
 
   ///A list of the genres used to classify the album. For example: 
   ///`Prog Rock`, `Post-Grunge`.
   ///
   /// (If not yet classified, the array is empty.)
-  List<String> genres;
+  final List<String> genres;
 
   ///The label for the album.
-  String label;
+  final String label;
 
   ///The popularity of the album. The value will be between 0 and 100, 
   ///with 100 being the most popular. The popularity is calculated from
   /// the popularity of the album’s individual tracks.
-  int popularity;
+  final int popularity;
 
   ///The tracks of the album.
-  Paging tracks;
+  final Paging tracks;
 
 
   Album.fromAlbum(AlbumSimplified album, this.copyrights, 

@@ -11,9 +11,11 @@ export 'src/Abstracts/SpotifyObject.dart';
 export 'src/Endpoints/AlbumEndpoints.dart';
 export 'src/Endpoints/ArtistsEndpoints.dart';
 export 'src/Endpoints/AuthEndpoints.dart';
+export 'src/Endpoints/PersonalizationEndpoints.dart';
 export 'src/Endpoints/PlayerEndpoints.dart';
 export 'src/Endpoints/SearchEndpoints.dart';
 export 'src/Endpoints/TrackEndpoints.dart';
+export 'src/Endpoints/UsersProfileEndpoints.dart';
 
 export 'src/Exceptions/HttpException.dart';
 export 'src/Exceptions/QueryException.dart';

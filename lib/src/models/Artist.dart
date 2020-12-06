@@ -6,21 +6,21 @@ import 'package:spotify_wrapper/src/models/Types.dart';
 
 class ArtistSimplified extends SpotifyObject {
   ///Known external URLs for this artist.
-  ExternalUrls externalUrls;
+  final ExternalUrls externalUrls;
 
   ///A link to the Web API endpoint providing full details of the artist.
-  String href;
+  final String href;
 
   ///	The Spotify ID for the artist.
-  String id;
+  final String id;
 
   ///The name of the artist.
-  String name;  
+  final String name;  
 
   ///The Spotify URI for the artist.
-  String uri;
+  final String uri;
 
-  ArtistSimplified(this.externalUrls, this.href, this.id, 
+  const ArtistSimplified(this.externalUrls, this.href, this.id, 
           this.name, this.uri): super(SpotifyType.Artist);
 
   factory ArtistSimplified.fromJSON(Map<String, dynamic> json) {

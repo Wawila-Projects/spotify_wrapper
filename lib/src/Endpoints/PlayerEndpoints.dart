@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:spotify_wrapper/src/Abstracts/Endpoints.dart';
 import 'package:spotify_wrapper/src/models/Device.dart';
@@ -76,7 +77,7 @@ class PlayerEndpoints extends Endpoints {
   ///Start/Resume a User's Playback
   Future<void> play({String deviceID, String contextUri, 
     List<String> uris, Map<String, dynamic> object, int positionMS}) async {
-    var body = {
+    final body = {
       'context_uri': contextUri,
       'uris': uris,
       'object': object,
@@ -89,18 +90,29 @@ class PlayerEndpoints extends Endpoints {
     if (deviceID != null) {
       query = '?device_id=$deviceID';
     }
-    await httpPut('$urlSegement/play$query');
+
+    final encondedBody = json.encode(body);
+
+    try {
+      await httpPut('$urlSegement/play$query', body: encondedBody);
+    } catch(Exception){
+
+    }
   }
 
   ///Pause a User's Playback
-  Future<Map<String, dynamic>> pause({String deviceID}) async {
+  Future<void> pause({String deviceID}) async {
     var query = '';
     if (deviceID != null) {
       query = '?device_id=$deviceID';
     }
-   final response = await httpPut('$urlSegement/pause$query');
-   print('Response =  $response');
-   return response;
+   
+   try {
+    await httpPut('$urlSegement/pause$query');
+   } catch(Exception) {
+     
+   }
+  //  return response;
   }
 
   ///Seek To Position In Currently Playing Track
@@ -136,11 +148,17 @@ class PlayerEndpoints extends Endpoints {
   ///* `track` will repeat the current track.
   ///* `context` will repeat the current context.
   ///* `off` will turn repeat off.
-  Future<void> repeat(String state, {String deviceID}) async {
+  Future<void> repeat(RepeateState state, {String deviceID}) async {
     var query = '';
     if (deviceID != null) {
       query = '&device_id=$deviceID';
     }
+
+    final repeat = state.toString().split('.')[1];
+
+    if (repeat != "track" || repeat != "context" || repeat != "off") 
+      throw ArgumentError.value(state, "Invalid State");
+
     await httpPut('$urlSegement/repeat?state=$state$query');
   }
 
@@ -149,6 +167,9 @@ class PlayerEndpoints extends Endpoints {
   ///
   ///[volumePercent]: The volume to set. Must be a value from 0 to 100 inclusive.
   Future<void> volume(int volumePercent, {String deviceID}) async {
+    if (volumePercent < 0 || volumePercent > 100)
+      throw ArgumentError.value(volumePercent, "Must be between 0 and 100 inclusively");
+
     var query = '';
     if (deviceID != null) {
       query = '&device_id=$deviceID';

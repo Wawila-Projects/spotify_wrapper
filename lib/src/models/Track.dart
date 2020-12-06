@@ -11,42 +11,42 @@ import 'package:spotify_wrapper/src/models/User.dart';
 class TrackSimplified extends SpotifyObject {
   ///The artists who performed the track. Each artist object includes 
   ///a link in [href] to more detailed information about the artist.
-  List<ArtistSimplified> artists;
+  final List<ArtistSimplified> artists;
   
   ///A list of the countries in which the track can be played,
   ///identified by their ISO 3166-1 alpha-2 code.
-  List<String> availableMarkets;
+  final List<String> availableMarkets;
 
   ///The disc number (usually [1] unless the 
   ///album consists of more than one disc).
-  int discNumber;
+  final int discNumber;
 
   ///The track length in milliseconds.
-  int durationMS;
+  final int durationMS;
 
   ///Whether or not the track has explicit lyrics 
   ///([true] = yes it does; [false] = no it does not OR unknown).
-  bool explicit;
+  final bool explicit;
 
   ///External URLs for this track.
-  ExternalUrls externalUrls;	
+  final ExternalUrls externalUrls;	
 
   ///A link to the Web API endpoint providing full details of the track.
-  String href; 
+  final String href; 
 
   //The Spotify ID for the track.
-  String id;
+  final String id;
 
   ///Part of the response when Track Relinking is applied. 
   ///If [true] , the track is playable in the given market. Otherwise [false].
-  bool isPlayable;
+  final bool isPlayable;
 
   ///Part of the response when Track Relinking is applied and is only 
   ///part of the response if the track linking, in fact, exists. The 
   ///requested track has been replaced with a different track. The 
   ///track in the linked_from object contains  information about the 
   ///originally requested track.
-  TrackLink linkedFrom;
+  final TrackLink linkedFrom;
 
   ///Part of the response when Track Relinking is applied, the original 
   ///track is not available in the given market, and Spotify did not have
@@ -54,25 +54,25 @@ class TrackSimplified extends SpotifyObject {
   ///  metadata for the original track, and a restrictions object containing 
   /// the reason why the track is not available: 
   /// `"restrictions" : {"reason" : "market"}`
-  Map<String, dynamic> restrictions;
+  final Map<String, dynamic> restrictions;
 
   ///The name of the track.
-  String name;
+  final String name;
 
   ///A link to a 30 second preview (MP3 format) of the track. Can be [null].
-  String previewUrl;
+  final String previewUrl;
 
   ///The number of the track. If an album has several discs, the track number
   /// is the number on the specified disc.
-  int trackNumber;
+  final int trackNumber;
 
   ///The Spotify URI for the track.
-  String uri; 
+  final String uri; 
 
   ///Whether or not the track is from a local file.
-  bool isLocal; 
+  final bool isLocal; 
 
-  TrackSimplified(this.artists, this.availableMarkets, this.discNumber, this.durationMS,
+  const TrackSimplified(this.artists, this.availableMarkets, this.discNumber, this.durationMS,
     this.explicit, this.externalUrls, this.href, this.id, this.isPlayable,
     this.linkedFrom, this.restrictions, this.name, this.previewUrl, this.trackNumber,
     this.uri, this.isLocal): super(SpotifyType.Track);

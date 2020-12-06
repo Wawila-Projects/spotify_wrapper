@@ -1,14 +1,15 @@
 class SpotifyImage {
   ///The image height in pixels. If unknown: `null` or not returned.
-  int height;
+  final int height;
 
   ///The source URL of the image.
-  String url;
+  final String url;
 
   ///The image width in pixels. If unknown: `null` or not returned.
-  int width;
+  final int width;
 
-  SpotifyImage(this.height, this.url, this.width);
+  const SpotifyImage(this.height, this.url, this.width);
+  
   factory SpotifyImage.fromJSON(Map<String, dynamic> json) {
     return SpotifyImage(json["height"], json["url"], json["width"]);
   }

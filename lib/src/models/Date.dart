@@ -2,7 +2,7 @@ class Date {
 
   ///String representation of the relase date, as 
   ///shown in the response.
-  String date;
+  final String date;
 
   ///The date the album was first released, for example `1981`.
   ///Depending on the precision, it might be shown as `1981-12`
@@ -14,12 +14,9 @@ class Date {
 
   ///The precision with which release_date value is known: 
   ///`year`, `month`, or `day`.
-  String precision;
+  final String precision;
 
-  Date(String date, String precision) {
-    this.precision = precision;
-    this.date = date;
-
+  Date(this.date, this.precision) {
     if (precision == 'day') {
       releaseDate = DateTime.parse(date);
     }

@@ -21,11 +21,8 @@ class TrackEndpoints extends Endpoints {
   Future<List<Track>> getSeveralTracks(List<String> ids) async {
     final query = '?ids=${ids.join(',')}';
     final response = await httpGet('$urlSegment/$query');
-    final values = List<Map<String, dynamic>>.from(response['albums']);
-    var tracks = List<Track>();
-    for (var track in values) {
-      tracks.add(Track.fromJSON(track));
-    }
+    final values = List<Map<String, dynamic>>.from(response['tracks']);
+    final tracks = values.map((v) => Track.fromJSON(v)).toList();
     return tracks;
   }
 

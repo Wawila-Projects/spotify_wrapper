@@ -18,6 +18,9 @@ class Context {
   Context(this.type, this.href, this.externalUrls, this.uri);
 
   factory Context.fromJSON(Map<String, dynamic> json) {
+    if (json == null)
+      return null;
+
     final type = EnumUtils.enumFromString<ContextType>(json['type']);
     final urls = ExternalUrls.fromJSON(json['external_urls']);
     return Context(type, json['href'], urls, json['uri']);

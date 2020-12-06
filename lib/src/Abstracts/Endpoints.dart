@@ -7,7 +7,7 @@ import 'package:spotify_wrapper/spotify_wrapper.dart';
 
 abstract class Endpoints {
   final _basePath = 'https://api.spotify.com/v1';
-  final _validStatusCodes = [200, 201, 202];
+  final _validStatusCodes = [200, 201, 202, 204];
 
   Future<Map<String, dynamic>> httpGet(String url, {Map<String, String> headers}) async {
     var allheaders = {
@@ -26,7 +26,7 @@ abstract class Endpoints {
     throw HttpExeption(response.statusCode, message: data['error']['message']);
   }
   
-  Future<Map<String, dynamic>> httpPut(String url, {Map<String, String> headers, String body}) async {
+  Future<void> httpPut(String url, {Map<String, String> headers, dynamic body}) async {
     var allheaders = {
       'Content-Type': 'application/json',    
       'Authorization': 'Bearer ${SpotifyWrapper().accessToken}'
@@ -36,11 +36,13 @@ abstract class Endpoints {
     }
    
     final response =  await http.put('$_basePath/$url', headers: allheaders, body: body);
-    final data = json.decode(response.body);
-    if (_validStatusCodes.contains(response.statusCode)) {
-      return data;
+    print(response.body);
+    print(response.statusCode);
+    if (!_validStatusCodes.contains(response.statusCode)) {
+      final data = json.decode(response.body);
+      throw HttpExeption(response.statusCode, message: data['error']['message']);
+      // return data;
     }
-    throw HttpExeption(response.statusCode, message: data['error']['message']);
   }
 
   Future<Map<String, dynamic>> httpPost(String url, {Map<String, String> headers, String body}) async {

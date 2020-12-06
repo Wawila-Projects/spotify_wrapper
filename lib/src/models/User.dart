@@ -4,7 +4,7 @@ import 'package:spotify_wrapper/src/models/Followers.dart';
 import 'package:spotify_wrapper/src/models/SporifyImage.dart';
 import 'package:spotify_wrapper/src/models/Types.dart';
 
-class User /*extends SpotifyObject*/ {
+class User extends SpotifyObject {
   ///The name displayed on the user’s profile. 
   ///`null` if not available.
   String displayName;
@@ -29,6 +29,22 @@ class User /*extends SpotifyObject*/ {
 
   ///The Spotify URI for this user.
   String uri;
+
+  User(this.displayName, this.externalUrls, this.followers, this.href, 
+        this.id, this.images, this.uri): super(SpotifyType.User);
+
+  factory User.fromJSON(Map<String, dynamic> json) {
+    final externalUrls = ExternalUrls.fromJSON(json['external_urls']);
+    final followers = Followers.fromJSON(json['followers']);
+    var images = List<SpotifyImage>();
+
+    for (var image in json['images']) {
+      images.add(SpotifyImage.fromJSON(image));
+    }
+
+    return User(json['display_name'], externalUrls, followers, 
+                json['href'], json['id'], images, json['uri']);
+  }
 }
 
 class UserPrivate extends User {
@@ -61,4 +77,8 @@ class UserPrivate extends User {
   ///_This field is only available when the current 
   ///user has granted access to the [user-read-private] scope_.
   String product;
+
+  UserPrivate.fromUser(User user, this.birthdate, this.country, this.product) :
+    super(user.displayName, user.externalUrls, user.followers, 
+          user.href, user.id, user.images, user.uri);
 }

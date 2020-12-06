@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   url_launcher: ^4.0.1
+  http: any
   flutter:
     sdk: flutter
 

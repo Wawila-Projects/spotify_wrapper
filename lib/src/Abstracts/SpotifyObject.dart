@@ -1,7 +1,7 @@
 import 'package:spotify_wrapper/src/models/Types.dart';
 
 abstract class SpotifyObject {
-  SpotifyType type;
+  final SpotifyType type;
 
-  SpotifyObject(this.type);
+  const SpotifyObject(this.type);
 }

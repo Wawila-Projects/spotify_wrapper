@@ -3,13 +3,8 @@ library spotify_wrapper;
 import 'dart:async';
 import 'dart:convert' show base64, utf8;
 
-import 'package:spotify_wrapper/src/Endpoints/AlbumEndpoints.dart';
-import 'package:spotify_wrapper/src/Endpoints/ArtistsEndpoints.dart';
-import 'package:spotify_wrapper/src/Endpoints/AuthEndpoints.dart';
-import 'package:spotify_wrapper/src/Endpoints/PlayerEndpoints.dart';
-import 'package:spotify_wrapper/src/Endpoints/SearchEndpoints.dart';
-import 'package:spotify_wrapper/src/Endpoints/TrackEndpoints.dart';
-import 'package:spotify_wrapper/src/models/AccessToken.dart';
+import 'package:spotify_wrapper/spotify_wrapper.dart';
+
 
 class SpotifyWrapper {
   static final SpotifyWrapper _instance = SpotifyWrapper._internal();
@@ -28,9 +23,11 @@ class SpotifyWrapper {
 
   AlbumEndpoints albumEndpoints = AlbumEndpoints();
   ArtistsEndpoints artistEndpoint = ArtistsEndpoints();
+  PersonalizationEndpoints personalizationEndpoints = PersonalizationEndpoints();
   PlayerEndpoints playerEndpoints = PlayerEndpoints();
   SearchEndpoints searchEndpoints = SearchEndpoints();
   TrackEndpoints trackEndpoints = TrackEndpoints();
+
 
   Future<void> initializeWrapper(String id, String secret, {List<String> scopes}) async {
     clientID = id;
